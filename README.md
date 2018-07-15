@@ -48,3 +48,8 @@ I used _create-react-app_ to generate the project boilerplate)
     ````
     sudo npm install --save react-router-dom
     ````
+### Setup redux
+- install <react-redux>
+    ````
+    npm install --save redux react-redux
+    ````
