@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { lists } from "../actions";
+import Header from "./Header";
 
 
 class TodoToday extends Component {
@@ -19,8 +20,9 @@ class TodoToday extends Component {
   render() {
     return (
       <div>
-        <h2>Welcome to TodoToday!</h2>
-        <hr />
+      <Header />
+        {/*<h2>Welcome to TodoToday!</h2>
+        <hr />*/}
 
         <h3>Lists</h3>
         <table>
