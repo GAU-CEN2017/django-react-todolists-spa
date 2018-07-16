@@ -27,17 +27,22 @@ class TodoToday extends Component {
         <hr />*/}
 
         <div class="todolists-container d-flex flex-row">
-          {this.props.lists.map(list => (
+          {this.props.lists.map((list, id) => (
             <div class="card">
-              <Card text={list.text} />
+              <Card text={list.text} isNewList={false} id={id} />
             </div>
           ))
           }
+          <div class="card new_list">
+            <Card text="New list" isNewList={true} id={null}/>
+          </div>
+          {/*
           <div class="btn-new_list-container d-flex flex-column">
             <div class="align-self-center">
               <button class="btn-new_list" name="btn-new_list"> New TODO List </button>
             </div>
           </div>
+          */}
         </div>
 
 
