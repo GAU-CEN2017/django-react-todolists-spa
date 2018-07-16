@@ -1,15 +1,16 @@
-const initialState = [
-    {text: "Write code!"}
-  ];
-  
-  
-  export default function lists(state=initialState, action) {
-    let allLists = state.slice();
+const initialState = [];
 
-    switch (action.type) {
 
-      case 'ADD_LIST':
-      return [...state, {text: action.text}];
+export default function lists(state = initialState, action) {
+  let allLists = state.slice();
+
+  switch (action.type) {
+
+    case 'FETCH_LISTS':
+      return [...state, ...action.lists];
+
+    case 'ADD_LIST':
+      return [...state, action.list];
 
     case 'UPDATE_LIST':
       let listToUpdate = allLists[action.id]
@@ -23,5 +24,5 @@ const initialState = [
 
     default:
       return state;
-    }
   }
+}

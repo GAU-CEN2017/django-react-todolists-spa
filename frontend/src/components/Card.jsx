@@ -8,7 +8,7 @@ class Card extends Component {
         super();
     };*/
     state = {
-        text: "",
+        list: "",
         isEditing: false,
     }
 
@@ -17,10 +17,10 @@ class Card extends Component {
         console.log('submitList');
         e.preventDefault();
         if (this.props.id === null) {
-            this.props.addList(this.state.text);
-            this.setState({ text: "" });
+            this.props.addList(this.state.list);
+            this.setState({ list: "" });
         } else {
-            this.props.updateList(this.props.id, this.state.text);
+            this.props.updateList(this.props.id, this.state.list);
             this.setState({ isEditing: false });
         }
     }
@@ -30,9 +30,9 @@ class Card extends Component {
         const createBlock = (
             <div className="card-title">
                 <form onSubmit={this.submitList}>
-                    <input value={this.state.text}
+                    <input value={this.state.list}
                         placeholder="Enter new TODO list..."
-                        onChange={(e) => this.setState({ text: e.target.value })}
+                        onChange={(e) => this.setState({ list: e.target.value })}
                         required />
                     <button className="card-new_list-btn" type="submit" ><i class="material-icons card-btn">add</i></button>
                 </form>
@@ -47,7 +47,7 @@ class Card extends Component {
                 </div>
 
                 <div className="card-title" onClick={() => this.setState({ isEditing: true })}>
-                    <h1> {this.props.text} </h1>
+                    <h1> {this.props.list} </h1>
                 </div>
             </div>
         );
@@ -55,9 +55,9 @@ class Card extends Component {
         const editBlock = (
             <div className="card-title">
                 <form onSubmit={this.submitList}>
-                    <input value={this.state.text}
-                        placeholder={this.props.text}
-                        onChange={(e) => this.setState({ text: e.target.value })}
+                    <input value={this.state.list}
+                        placeholder={this.props.list}
+                        onChange={(e) => this.setState({ list: e.target.value })}
                         required />
                     <button className="card-new_list-btn" type="submit" ><i class="material-icons card-btn">done</i></button>
                 </form>
@@ -112,11 +112,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addList: (text) => {
-            dispatch(lists.addList(text));
+        addList: (list) => {
+            return dispatch(lists.addList(list));
         },
-        updateList: (id, text) => {
-            dispatch(lists.updateList(id, text));
+        updateList: (id, list) => {
+            dispatch(lists.updateList(id, list));
         },
         deleteList: (id) => {
             dispatch(lists.deleteList(id));

@@ -13,6 +13,11 @@ class TodoToday extends Component {
     text: ""
   }
 
+  componentDidMount() {
+    console.log('didMount');
+    this.props.fetchLists();
+  }
+
   submitList = (e) => {
     e.preventDefault();
     this.props.addList(this.state.text);
@@ -29,12 +34,12 @@ class TodoToday extends Component {
         <div class="todolists-container d-flex flex-row">
           {this.props.lists.map((list, id) => (
             <div class="card">
-              <Card text={list.text} isNewList={false} id={id} />
+              <Card list={list.text} isNewList={false} id={id} />
             </div>
           ))
           }
           <div class="card new_list">
-            <Card text="New list" isNewList={true} id={null}/>
+            <Card text="New list" isNewList={true} id={null} />
           </div>
           {/*
           <div class="btn-new_list-container d-flex flex-column">
@@ -59,6 +64,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchLists: () => {
+      dispatch(lists.fetchLists());
+    },
     addList: (text) => {
       dispatch(lists.addList(text));
     },
