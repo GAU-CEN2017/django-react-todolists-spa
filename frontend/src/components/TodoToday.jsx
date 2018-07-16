@@ -31,20 +31,20 @@ class TodoToday extends Component {
         {/*<h2>Welcome to TodoToday!</h2>
         <hr />*/}
 
-        <div class="todolists-container d-flex flex-row">
+        <div className="todolists-container d-flex flex-row">
           {this.props.lists.map((list, id) => (
-            <div class="card">
-              <Card list={list.text} isNewList={false} id={id} />
+            <div className="card" key={id}>
+              <Card text={list.text} isNewList={false} id={id} />
             </div>
           ))
           }
-          <div class="card new_list">
+          <div className="card new_list">
             <Card text="New list" isNewList={true} id={null} />
           </div>
           {/*
-          <div class="btn-new_list-container d-flex flex-column">
-            <div class="align-self-center">
-              <button class="btn-new_list" name="btn-new_list"> New TODO List </button>
+          <div className="btn-new_list-container d-flex flex-column">
+            <div className="align-self-center">
+              <button className="btn-new_list" name="btn-new_list"> New TODO List </button>
             </div>
           </div>
           */}
@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(lists.addList(text));
     },
     updateList: (id, text) => {
-      dispatch(lists.addList(id, text));
+      return dispatch(lists.addList(id, text));
     },
     deleteList: (id) => {
       dispatch(lists.deleteList(id));

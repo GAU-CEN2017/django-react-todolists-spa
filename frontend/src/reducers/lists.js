@@ -13,13 +13,13 @@ export default function lists(state = initialState, action) {
       return [...state, action.list];
 
     case 'UPDATE_LIST':
-      let listToUpdate = allLists[action.id]
-      listToUpdate.text = action.text;
-      allLists.splice(action.id, 1, listToUpdate);
+      let listToUpdate = allLists[action.index]
+      listToUpdate.text = action.list.text;
+      allLists.splice(action.index, 1, listToUpdate);
       return allLists;
 
     case 'DELETE_LIST':
-      allLists.splice(action.id, 1);
+      allLists.splice(action.index, 1);
       return allLists;
 
     default:
