@@ -197,7 +197,10 @@ input {
   background: transparent;
 }
 
-
+.card-btns{
+  display: flex;
+  justify-content: end;
+}
 
 /****************************************************/
 /****** from boilerplate ****************************/

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { lists } from "../actions";
 import Header from "./Header";
+import Card from "./Card";
+import Route from 'react-router-dom/Route';
 
 
 class TodoToday extends Component {
@@ -14,29 +16,31 @@ class TodoToday extends Component {
   submitList = (e) => {
     e.preventDefault();
     this.props.addList(this.state.text);
-    this.setState({text: ""});
+    this.setState({ text: "" });
   }
 
   render() {
     return (
       <div>
-      <Header />
+        <Header />
         {/*<h2>Welcome to TodoToday!</h2>
         <hr />*/}
 
-        <h3>Lists</h3>
-        <table>
-          <tbody>
-            {this.props.lists.map(list => (
-              <tr>
-                <td>{list.text}</td>
-                <td><button>edit</button></td>
-                <td><button>delete</button></td>
-                <td><button>add task</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div class="todolists-container d-flex flex-row">
+          {this.props.lists.map(list => (
+            <div class="card">
+              <Card text={list.text} />
+            </div>
+          ))
+          }
+          <div class="btn-new_list-container d-flex flex-column">
+            <div class="align-self-center">
+              <button class="btn-new_list" name="btn-new_list"> New TODO List </button>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     )
   }
