@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { lists } from "../actions";
 
+import Task from "./Task";
+
 class Card extends Component {
     /*constructor() {
         super();
@@ -12,6 +14,10 @@ class Card extends Component {
         isEditing: false,
     }
 
+
+    selectToEdit = () => {
+        this.setState({text: this.props.text, isEditing: true});
+    }
 
     submitList = (e) => {
         console.log('submitList');
@@ -42,7 +48,7 @@ class Card extends Component {
         const readOnlyBlock = (
             <div>
                 <div className="card-btns">
-                    <span onClick={() => this.setState({ isEditing: true })} className="material-icons card-btn">create</span>
+                    <span onClick={() => this.selectToEdit()} className="material-icons card-btn">create</span>
                     <span onClick={() => this.props.deleteList(this.props.id)} className="material-icons card-btn">delete</span>
                 </div>
 
@@ -66,35 +72,20 @@ class Card extends Component {
 
         return (
             <div>
-                {this.props.isNewList === false &&
+                {this.props.type === "tasksList" &&
                     <div>
                         {this.state.isEditing === false && readOnlyBlock}
                         {this.state.isEditing === true && editBlock}
-                        
-                        <div className="card-container">
-                            <form>
-                                {/*% for task in todolist.task_set.all %}
-                        
-            <div className="list_item" id="task-{{ task.id }}" data-taskid="{{ task.id }}" data-listid="{{ todolist.id }}" onclick="check_task(this.id)">
-                            <span className="dot" name="task-{{ task.id }}"></span>
-                            <!--<input type="checkbox" name="task" id="task{{ forloop.counter }}" value="{{ task.id }}" />
-                            <label for="task{{ forloop.counter }}">{{ task.task_text }}</label>-->
-                <span className="task" id="{{ task.id }}" name="task-{{ task.id }}">{{ task.task_text }}</span>
-                        </div>
-                        <br />
 
-                        {% endfor %}
-                */}
-                                <div className="list_item">
-                                    <span className="dot" ></span>
-                                    <input type="text" placeholder="new task" className="new_task" />
-                                </div>
-                            </form>
+                        <div className="card-container">
+                            
+                            <Task type="tasksList" isEditing={true} id={null}/>  {/*new task */}
+
                         </div>
                     </div>
                 }
 
-                {this.props.isNewList === true && createBlock}
+                {this.props.type === "newList" && createBlock}
 
 
 
@@ -107,6 +98,7 @@ class Card extends Component {
 const mapStateToProps = state => {
     return {
         lists: state.lists,
+        tasks: state.tasks
     }
 }
 

@@ -173,6 +173,14 @@ p.header-main-content__text {
   background: var(--main-line-color);
 }
 
+.check-mark {
+  height: 0.5rem;
+  width: 0.5rem;
+  /*border: 2px solid var(--main-line-color);*/
+  display: inline-block;
+  color: var(--main-line-color);
+}
+
 .list_item {
   cursor: pointer;
   transition: 0.2s;
@@ -212,8 +220,15 @@ input {
   border-radius: 25%;
 }
 
-.card-btn:hover {
+.card-btn:hover .task-btn:hover{
   font-weight: bold;
+}
+
+.task-btn {
+  font-size: 0.8rem;
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 25%;
 }
 
 .new_list {
