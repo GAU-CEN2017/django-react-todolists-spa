@@ -31,52 +31,19 @@ class TodoToday extends Component {
     console.log(JSON.stringify(this.props.lists));
     console.log('tasks:');
     console.log(JSON.stringify(this.props.tasks));
+
   }
 
-  /*submitList = (e) => {
-    e.preventDefault();
-    this.props.addList(this.state.text);
-    this.setState({ text: "" });
-  }*/
-
-  /*getListTasks(listId) {
-    let tsksLst = [];
-    for (var t in this.props.tasks) {
-      let tsk = this.props.tasks[t];
-      if (tsk.todolist === listId) {
-        tsksLst.push(tsk);
-      }
-    }
-    let listTsksList = this.state.listTsksList;
-    if(listTsksList.find(id => id===listId)){
-      listTsksList[listTsksList.findIndex(id => id===listId)] = ({id: listId, tsksLst: tsksLst});
-    } else{
-      listTsksList.push({id: listId, tsksLst: tsksLst});
-    }
-
-    this.setState({listTsksList: listTsksList});
-  }*/
-
-  /* getListTasks(listId) {
-    let tsksLst = [];
-    for (var t in this.props.tasks) {
-      let tsk = this.props.tasks[t];
-      if (tsk.todolist === listId) {
-        tsksLst.push(tsk);
-      }
-    }
-
-    return tsksLst;
-  } */
 
   render() {
     return (
       <div>
         <Header />
+
         <div className="todolists-container d-flex flex-row">
           {this.props.lists.map((list, id) => (
             <div className="card" key={`list_${id}`}>
-            <Card text={list.text} type="tasksList" listId={list.id} id={id} />
+              <Card text={list.text} type="tasksList" listId={list.id} id={id} />
               {/* <Card text={list.text} type="tasksList" listId={list.id} id={id} tsksLst={this.getListTasks(list.id)} /> */}
               {/*<Card text={list.text} type="tasksList" listId={list.id} id={id} getListTasks={this.getListTasks} />*/}
             </div>
@@ -84,6 +51,14 @@ class TodoToday extends Component {
           }
           <div className="card new_list">
             <Card text="New list" type="newList" id={null} />
+          </div>
+        </div>
+
+        <div className="reports-container">
+          <div className="completed-tasks-container" >
+            <div className="card">
+              <Card text="Completed today" type="tasksList" />
+            </div>
           </div>
 
         </div>

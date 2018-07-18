@@ -29,6 +29,7 @@ export default function tasks(state = initialState, action) {
             console.log('enter reducer CHECK_TASK');
             //taskToUpdate.is_completed = taskToUpdate.is_completed;
             taskList.splice(index, 1, taskToUpdate);
+            console.log('reducer return: '+JSON.stringify(taskList));
             return taskList;
 
         default:

@@ -72,9 +72,10 @@ export const checkTask = (id, text, todolist) => {
         /* let taskList = getState.tasks;
         var taskToUpdate = taskList.find(t => t.id === id);
         var index = taskList.findIndex(t => t.id === id); */
+        let completedDate = new Date();
 
         let headers = {"Content-Type": "application/json"};
-        let body = JSON.stringify({text, todolist , is_completed:true});
+        let body = JSON.stringify({text, todolist , is_completed:true, completed_date: completedDate});
         //let taskId = getState().tasks[index].id;
     
         return fetch(`/api/tasks/${id}/`, {headers, method: "PUT", body})

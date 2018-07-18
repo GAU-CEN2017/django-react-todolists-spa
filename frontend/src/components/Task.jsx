@@ -57,8 +57,10 @@ class Task extends Component {
                     tsksLst.push(tsk);
                 }
             }
-
+            
             this.setState({ isEditingTask: false, isNew: false, tsksLst: tsksLst });
+            //this.setState(this.state);
+
             //this.forceUpdate();
             this.props.getListTasks(this.props.listId);
         } else {

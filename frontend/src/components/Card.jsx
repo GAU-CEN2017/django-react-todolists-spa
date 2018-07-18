@@ -15,6 +15,7 @@ class Card extends Component {
             taskText: "",
             isEditingTask: false,
             tsksLst: [],
+            completedTasks: []
         }
 
         this.getListTasks = this.getListTasks.bind(this);
@@ -24,10 +25,11 @@ class Card extends Component {
 
     componentDidUpdate(prevProps, prevState) {
 
-
         if (prevProps.tasks !== this.props.tasks) {
             console.log('CARD props.task changed');
-            let tsksLst = [];
+            this.getListTasks(this.props.listId);
+
+            /* let tsksLst = [];
             for (var t in this.props.tasks) {
                 let tsk = this.props.tasks[t];
                 if (tsk.todolist === this.props.listId) {
@@ -35,7 +37,8 @@ class Card extends Component {
                 }
             }
             //console.log('tsksLst: '+JSON.stringify(tsksLst));
-            this.setState({ tsksLst: tsksLst });
+            this.setState({ tsksLst: tsksLst }); */
+
             this.forceUpdate();
         }
 
@@ -76,20 +79,25 @@ class Card extends Component {
         this.setState({ text: this.props.text, isEditing: true });
     }
 
-    selectToEditTask = (taskId) => {
+    /* selectToEditTask = (taskId) => {
         // find this task in the 'tasks' array, 
         //this.setState({ task: taskId, isEditingTask: isEditingTask });
-    }
+    } */
 
     submitList = (e) => {
         console.log('submitList');
         e.preventDefault();
         if (this.props.id === null) {
-            this.props.addList(this.state.text);
-            this.setState({ text: "" });
+            this.props.addList(this.state.text)
+                .then(() => {
+                    this.setState({ text: "" });
+                });
         } else {
-            this.props.updateList(this.props.id, this.state.text);
-            this.setState({ isEditing: false });
+            this.props.updateList(this.props.id, this.state.text)
+                .then(() => {
+                    this.setState({ isEditing: false });
+                })
+
         }
     }
 
@@ -132,6 +140,14 @@ class Card extends Component {
             </div>
         );
 
+        const completedTasksBlock = (
+            <div>
+                <div className="card-title" >
+                    <h1> {this.props.text} </h1>
+                </div>
+            </div>
+        );
+
         return (
             <div>
                 {this.props.type === "tasksList" &&
@@ -151,12 +167,6 @@ class Card extends Component {
                                 </div>
                             ))}
 
-                            {/*this.props.lists.map((list, id) => (
-                                <div className="card" key={`list_${id}`}>
-                                    <Card text={list.text} type="tasksList" id={id} />
-                                </div>
-                            ))
-                            */}
 
                             <Task type="tasksList" isEditingTask={true} id={null} taskId={null} taskText="" listId={this.props.listId}
                                 getListTasks={this.getListTasks} />
@@ -165,6 +175,8 @@ class Card extends Component {
                 }
 
                 {this.props.type === "newList" && createBlock}
+
+                {this.props.type === "completedTasks" && completedTasksBlock}
 
 
 
@@ -183,12 +195,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        /* fetchLists: () => {
-            dispatch(lists.fetchLists());
-        },
-        fetchTasks: () => {
-            dispatch(tasks.fetchTasks());
-        }, */
+
         addList: (text) => {
             return dispatch(lists.addList(text));
         },
