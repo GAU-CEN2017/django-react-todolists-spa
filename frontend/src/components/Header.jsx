@@ -4,14 +4,18 @@ import { Link } from 'react-router-dom';
 import { lists } from "../actions";
 */
 
+import Login from './Login';
+
 class Header extends Component {
     render() {
         return (
             < header id="top" className="header-main" >
                 <div className="header-main--inside d-flex flex-column">
                     <div className="header-main--social">
-                        Sin in/ Sign up
-                </div>
+                        {/*Sin in/ Sign up*/}
+                        <Login />
+                    </div>
+
 
 
                     <div className="header-main-content container align-self-center text-center">

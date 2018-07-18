@@ -244,9 +244,41 @@ p.header-main-content__text {
   color: rgba(0, 0, 0, 0.2);
 }
 
+.auth {
+  width: 15vw;
+  margin: 5px;
+  float: right;
+}
+
+.auth-input {
+  border: 0.5px solid var(--main-line-color);
+  /* width: 15vw; */
+  float: right;
+}
+
+.auth-legend{
+  margin-right: 5px;
+}
+
+.auth-btn {
+  float: right;
+  cursor: pointer;
+  width: 60px;
+}
+
+.auth-btn.login{
+  background: var(--main-line-color);
+  border: none;
+}
+
+.auth-btn.register{
+  background: none;
+  border: 0.5px solid var(--main-line-color);;
+}
+
 input {
   margin: 0;
-  border: none;
+  border: 0; /*.5px solid var(--main-line-color);*/
   border-radius: 0;
   width: 75%;
   padding: 10px;
