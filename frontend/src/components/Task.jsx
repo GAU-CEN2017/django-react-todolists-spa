@@ -113,7 +113,7 @@ class Task extends Component {
             </div>
         )
 
-        const isTaskBlock = this.state.isEditingTask == false && this.state.isNew !== null;
+        const isTaskBlock = this.state.isEditingTask == false && this.state.isNew !== null && this.props.type === "tasksList";
 
         return (
             <div>

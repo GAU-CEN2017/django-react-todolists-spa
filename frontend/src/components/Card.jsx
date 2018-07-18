@@ -28,39 +28,12 @@ class Card extends Component {
         if (prevProps.tasks !== this.props.tasks) {
             console.log('CARD props.task changed');
             this.getListTasks(this.props.listId);
-
-            /* let tsksLst = [];
-            for (var t in this.props.tasks) {
-                let tsk = this.props.tasks[t];
-                if (tsk.todolist === this.props.listId) {
-                    tsksLst.push(tsk);
-                }
-            }
-            //console.log('tsksLst: '+JSON.stringify(tsksLst));
-            this.setState({ tsksLst: tsksLst }); */
+            this.getCompletedTasks();
 
             this.forceUpdate();
         }
 
     }
-
-    /* componentWillUpdate(nextProps, nextState) {
-
-
-        if (nextProps.tasks !== this.props.tasks) {
-            console.log('CARD props.task will change');
-            let tsksLst = [];
-            for (var t in nextProps.tasks) {
-                let tsk = nextProps.tasks[t];
-                if (tsk.todolist === this.props.listId) {
-                    tsksLst.push(tsk);
-                }
-            }
-            //console.log('tsksLst: '+JSON.stringify(tsksLst));
-            this.setState({ tsksLst: tsksLst });
-        }
-
-    } */
 
     getListTasks(listId) {
         let tsksLst = [];
@@ -72,6 +45,23 @@ class Card extends Component {
         }
 
         this.setState({ tsksLst: tsksLst });
+    }
+
+    getCompletedTasks() {
+        let completedTasks = [];
+        let today = new Date().toISOString().substr(0,10);
+        console.log('today: '+today);
+        for (var t in this.props.tasks) {
+            let tsk = this.props.tasks[t];
+            let completedDate = (""+tsk.completed_date).substr(0,10);
+            console.log('completedDate: '+completedDate);
+            //console.log('completedDate substring: '+completedDate. );
+            
+            if (completedDate === today) {
+                completedTasks.push(tsk);
+            }
+        }
+        this.setState({ completedTasks: completedTasks });
     }
 
 
@@ -144,6 +134,17 @@ class Card extends Component {
             <div>
                 <div className="card-title" >
                     <h1> {this.props.text} </h1>
+                </div>
+
+                <div className="card-container">
+                    {this.state.completedTasks.map((task, id) => (
+                        <div key={`task_${id}`}>
+                            <Task type="checkedTasks" isEditingTask={false}
+                                id={id} taskId={task.id} taskText={task.text}
+                                listId={task.todolist} isChecked={task.is_completed} />
+                            {/*selectToEditTask={this.selectToEditTask}*/}
+                        </div>
+                    ))}
                 </div>
             </div>
         );
