@@ -145,7 +145,7 @@ class Card extends Component {
                                 <div key={`task_${id}`}>
                                     <Task type="tasksList" isEditingTask={false}
                                         id={id} taskId={task.id} taskText={task.text}
-                                        listId={task.todolist}
+                                        listId={task.todolist} isChecked={task.is_completed}
                                         getListTasks={this.getListTasks} />
                                     {/*selectToEditTask={this.selectToEditTask}*/}
                                 </div>

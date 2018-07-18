@@ -31,10 +31,6 @@ export const addTask = (text, todolist) => {
 export const updateTask = (id, text, todolist) => {
     return (dispatch, getState) => {
         
-        console.log('enter updateTask');
-        console.log('id: '+id);
-        //console.log('taskId (by index): '+getState().tasks[id].id)
-        
         let headers = {"Content-Type": "application/json"};
         let body = JSON.stringify({text, todolist });
         //let taskId = getState().tasks[index].id;
@@ -65,6 +61,30 @@ export const deleteTask = id => {
                 id
               })
             }
+          })
+      }
+}
+
+export const checkTask = (id, text, todolist) => {
+    return (dispatch, getState) => {
+        console.log('enter actions checkTask');
+        
+        /* let taskList = getState.tasks;
+        var taskToUpdate = taskList.find(t => t.id === id);
+        var index = taskList.findIndex(t => t.id === id); */
+
+        let headers = {"Content-Type": "application/json"};
+        let body = JSON.stringify({text, todolist , is_completed:true});
+        //let taskId = getState().tasks[index].id;
+    
+        return fetch(`/api/tasks/${id}/`, {headers, method: "PUT", body})
+          .then(res => res.json())
+          .then(task => {
+            return dispatch({
+              type: 'CHECK_TASK',
+              task,
+              id,
+            })
           })
       }
 }

@@ -96,6 +96,7 @@ p.header-main-content__text {
   height: 80vh;
   justify-content: center;
   background-color: var(--todolists-container-background);
+  overflow-x: auto;
 }
 
 .flex-column {
@@ -192,7 +193,8 @@ p.header-main-content__text {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.task.checked {
+/*.task */
+.checked {
   text-decoration: line-through;
   text-decoration-color: var(--main-line-color);
   color: rgba(0, 0, 0, 0.2);

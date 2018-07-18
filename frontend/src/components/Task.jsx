@@ -6,11 +6,12 @@ import { tasks, lists } from "../actions";
 class Task extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             taskText: "",
             isEditingTask: "",
-            isNew: ""
+            isNew: "",
+            checked: false,
         }
 
         this.submitTask = this.submitTask.bind(this);
@@ -22,12 +23,19 @@ class Task extends Component {
         this.setState({
             taskText: this.props.taskText,
             isEditingTask: this.props.isEditingTask,
-            isNew: (this.props.id === null)
+            isNew: (this.props.id === null),
+            checked: this.props.isChecked
         });
     }
 
-    checkTask = (e) => {
+    toggleCheckTask = () => {
         console.log('enter checkTask');
+        const currentState = this.state.checked;
+        if (this.props.id !== null && !currentState) {
+            this.props.checkTask(this.props.taskId, this.state.taskText, this.props.listId);
+            this.setState({ checked: true });
+        }
+
     }
 
     selectToEditTask = () => {
@@ -51,7 +59,7 @@ class Task extends Component {
             }
 
             this.setState({ isEditingTask: false, isNew: false, tsksLst: tsksLst });
-            this.forceUpdate();
+            //this.forceUpdate();
             this.props.getListTasks(this.props.listId);
         } else {
             this.props.updateTask(this.props.taskId, this.state.taskText, this.props.listId);
@@ -69,10 +77,12 @@ class Task extends Component {
                     <span onClick={() => this.selectToEditTask()} className="material-icons task-btn">create</span>
                     <span onClick={() => this.props.deleteTask(this.props.taskId)} className="material-icons task-btn">delete</span>
                 </div>
-                <div className="list_item" onClick={() => this.checkTask()}>
-                    <span className="dot" ></span>
-                    <span className="task">{this.state.taskText}</span>
-                    <br />
+                <div className="list_item ">
+                    <div className={this.state.checked ? 'checked' : null} onClick={() => this.toggleCheckTask()}>
+                        <span className="dot" ></span>
+                        <span className="task">{this.state.taskText}</span>
+                        <br />
+                    </div>
                 </div>
             </div>
         )
@@ -133,6 +143,9 @@ const mapDispatchToProps = dispatch => {
         deleteTask: (id) => {
             dispatch(tasks.deleteTask(id));
         },
+        checkTask: (id, text, listId) => {
+            return dispatch(tasks.checkTask(id, text, listId));
+        }
     }
 }
 
