@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 
 from .models import TodoList, Task
-from .serializers import (ListSerializer, TaskSerializer,
+from .serializers import (ListSerializer, TaskSerializer, CreateUserSerializer,
                             UserSerializer, LoginUserSerializer)
 
 
