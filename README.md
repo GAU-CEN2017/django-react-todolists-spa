@@ -53,3 +53,17 @@ I used _create-react-app_ to generate the project boilerplate)
     ````
     npm install --save redux react-redux
     ````
+
+### To be able to export PDF
+- install html2canvas and jsPDF
+    ````
+    cd frontend
+    npm install --save html2canvas
+    npm install --save jspdf
+    ````
+
+### To handle user authentication
+- install django-rest-knox
+    ````
+    (myvenv)  $ pip install django-rest-knox
+    ````

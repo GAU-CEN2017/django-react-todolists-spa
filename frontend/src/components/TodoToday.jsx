@@ -5,7 +5,8 @@ import { lists, tasks } from "../actions";
 import Header from "./Header";
 import Card from "./Card";
 import Route from 'react-router-dom/Route';
-
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 class TodoToday extends Component {
   /*constructor() {
@@ -34,6 +35,24 @@ class TodoToday extends Component {
 
   }
 
+  exportPDF() {
+    const input = document.getElementById('divToPrint');
+    html2canvas(input, {
+      removeContainer: "true", backgroundColor: '#f5f5f5',
+      width: '210mm',
+      minHeight: '297mm',
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+        // pdf.output('dataurlnewwindow');
+        pdf.save("download.pdf");
+      });
+  }
+
 
   render() {
     return (
@@ -54,7 +73,11 @@ class TodoToday extends Component {
           </div>
         </div>
 
-        <div className="reports-container d-flex flex-row">
+        <div className="reports-container"  >
+          <button className="report-btn" onClick={this.exportPDF}>
+            {/*<i className="material-icons">file_download</i>*/}
+            <i class="fa fa-file-pdf-o" ></i>
+          </button>
           <div className="completed-tasks-container d-flex flex-row" >
             <div className="card">
               <Card text="Completed today" type="completedTasks" />
@@ -62,6 +85,12 @@ class TodoToday extends Component {
             <div className="card">
               <Card text="Next Priorities" type="futureTasks" />
             </div>
+
+          </div>
+
+          <div id="divToPrint" className="print-container" >
+            <Card text="Completed today" type="completedTasks" />
+            <Card text="Next Priorities" type="futureTasks" />
           </div>
 
         </div>
