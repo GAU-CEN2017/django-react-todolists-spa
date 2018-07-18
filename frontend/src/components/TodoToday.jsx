@@ -55,9 +55,12 @@ class TodoToday extends Component {
         </div>
 
         <div className="reports-container d-flex flex-row">
-          <div className="completed-tasks-container" >
+          <div className="completed-tasks-container d-flex flex-row" >
             <div className="card">
               <Card text="Completed today" type="completedTasks" />
+            </div>
+            <div className="card">
+              <Card text="Next Priorities" type="futureTasks" />
             </div>
           </div>
 

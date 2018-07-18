@@ -15,7 +15,8 @@ class Card extends Component {
             taskText: "",
             isEditingTask: false,
             tsksLst: [],
-            completedTasks: []
+            completedTasks: [],
+            futureTasks: []
         }
 
         this.getListTasks = this.getListTasks.bind(this);
@@ -29,6 +30,7 @@ class Card extends Component {
             console.log('CARD props.task changed');
             this.getListTasks(this.props.listId);
             this.getCompletedTasks();
+            this.getFutureTasks();
 
             this.forceUpdate();
         }
@@ -49,19 +51,29 @@ class Card extends Component {
 
     getCompletedTasks() {
         let completedTasks = [];
-        let today = new Date().toISOString().substr(0,10);
-        console.log('today: '+today);
+        let today = new Date().toISOString().substr(0, 10);
         for (var t in this.props.tasks) {
             let tsk = this.props.tasks[t];
-            let completedDate = (""+tsk.completed_date).substr(0,10);
-            console.log('completedDate: '+completedDate);
-            //console.log('completedDate substring: '+completedDate. );
-            
+            let completedDate = ("" + tsk.completed_date).substr(0, 10);
+            console.log('completedDate: ' + completedDate);
+
             if (completedDate === today) {
                 completedTasks.push(tsk);
             }
         }
         this.setState({ completedTasks: completedTasks });
+    }
+
+    getFutureTasks() {
+        let futureTasks = [];
+        for (var t in this.props.tasks) {
+            let tsk = this.props.tasks[t];
+
+            if (!tsk.is_completed) {
+                futureTasks.push(tsk);
+            }
+        }
+        this.setState({ futureTasks: futureTasks });
     }
 
 
@@ -105,7 +117,7 @@ class Card extends Component {
             </div>
         );
 
-        const readOnlyBlock = (
+        const todolistBlock = (
             <div>
                 <div className="card-btns">
                     <span onClick={() => this.selectToEdit()} className="material-icons card-btn">create</span>
@@ -149,11 +161,30 @@ class Card extends Component {
             </div>
         );
 
+        const futureTasksBlock = (
+            <div>
+                <div className="card-title" >
+                    <h1> {this.props.text} </h1>
+                </div>
+
+                <div className="card-container">
+                    {this.state.futureTasks.map((task, id) => (
+                        <div key={`task_${id}`}>
+                            <Task type="futureTasks" isEditingTask={false}
+                                id={id} taskId={task.id} taskText={task.text}
+                                listId={task.todolist} isChecked={task.is_completed} />
+                            {/*selectToEditTask={this.selectToEditTask}*/}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+
         return (
             <div>
                 {this.props.type === "tasksList" &&
                     <div>
-                        {this.state.isEditing === false && readOnlyBlock}
+                        {this.state.isEditing === false && todolistBlock}
                         {this.state.isEditing === true && editBlock}
 
 
@@ -178,6 +209,8 @@ class Card extends Component {
                 {this.props.type === "newList" && createBlock}
 
                 {this.props.type === "completedTasks" && completedTasksBlock}
+
+                {this.props.type === "futureTasks" && futureTasksBlock}
 
 
 

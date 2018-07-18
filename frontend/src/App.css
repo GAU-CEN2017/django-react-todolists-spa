@@ -179,11 +179,13 @@ p.header-main-content__text {
   display: inline-block;
 }
 
-.checked.dot {
+.dot.checked {
+
   background: var(--main-line-color);
 }
 
 .check-mark {
+  font-size: 1rem;
   height: 0.5rem;
   width: 0.5rem;
   /*border: 2px solid var(--main-line-color);*/
@@ -202,7 +204,9 @@ p.header-main-content__text {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-/*.task */
+.task {
+  padding-left: 1rem;
+}
 .checked {
   text-decoration: line-through;
   text-decoration-color: var(--main-line-color);

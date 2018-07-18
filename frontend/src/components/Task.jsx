@@ -57,7 +57,7 @@ class Task extends Component {
                     tsksLst.push(tsk);
                 }
             }
-            
+
             this.setState({ isEditingTask: false, isNew: false, tsksLst: tsksLst });
             //this.setState(this.state);
 
@@ -75,13 +75,12 @@ class Task extends Component {
         const taskBlock = (
             <div>
                 <div className="card-btns">
-                    {/*<span onClick={() => this.setState({ isEditingTask: true })} className="material-icons task-btn">create</span>*/}
                     <span onClick={() => this.selectToEditTask()} className="material-icons task-btn">create</span>
                     <span onClick={() => this.props.deleteTask(this.props.taskId)} className="material-icons task-btn">delete</span>
                 </div>
                 <div className="list_item ">
                     <div className={this.state.checked ? 'checked' : null} onClick={() => this.toggleCheckTask()}>
-                        <span className="dot" ></span>
+                        <span className={this.state.checked ? 'dot checked' : 'dot'} ></span>
                         <span className="task">{this.state.taskText}</span>
                         <br />
                     </div>
@@ -113,6 +112,18 @@ class Task extends Component {
             </div>
         )
 
+        const futureTaskBlock = (
+            <div>
+                <div className="list_item ">
+                    <div >
+                        <span className="dot" ></span>
+                        <span className="task">{this.state.taskText}</span>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        )
+
         const isTaskBlock = this.state.isEditingTask == false && this.state.isNew !== null && this.props.type === "tasksList";
 
         return (
@@ -121,6 +132,7 @@ class Task extends Component {
                 {this.state.isEditingTask && editTaskBlock}
                 {isTaskBlock && taskBlock}
                 {this.props.type === "checkedTasks" && checkedTaskBlock}
+                {this.props.type === "futureTasks" && futureTaskBlock}
 
             </div>
         )
