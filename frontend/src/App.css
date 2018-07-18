@@ -220,7 +220,7 @@ input {
   border-radius: 25%;
 }
 
-.card-btn:hover .task-btn:hover{
+.card-btn:hover{
   font-weight: bold;
 }
 
@@ -229,6 +229,10 @@ input {
   transition: 0.3s;
   cursor: pointer;
   border-radius: 25%;
+}
+
+.task-btn:hover{
+  font-weight: bold;
 }
 
 .new_list {

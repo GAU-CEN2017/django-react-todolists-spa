@@ -46,18 +46,18 @@ export const updateList = (index, text) => {
     }
 }
 
-export const deleteList = index => {
+export const deleteList = id => {
     return (dispatch, getState) => {
 
         let headers = { "Content-Type": "application/json" };
-        let listId = getState().lists[index].id;
+        //let listId = getState().lists[index].id;
 
-        return fetch(`/api/lists/${listId}/`, { headers, method: "DELETE" })
+        return fetch(`/api/lists/${id}/`, { headers, method: "DELETE" })
             .then(res => {
                 if (res.ok) {
                     return dispatch({
                         type: 'DELETE_LIST',
-                        index,
+                        id,
                     })
 
                 }
