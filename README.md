@@ -3,7 +3,47 @@ This application setup was based on @v1k45 [tutorial](http://v1k45.com/blog/mode
 
 # django-react-todolists-spa
 
-## Environment setup
+## How to run the SPA at local server
+
+### Install python requirements
+
+- make sure you have python 3.6 installed
+- clone this repository
+- install and activate a virtual environment
+- go to the repository root and install dependencies:
+    ````
+    $ pip install -r requirements.txt
+    ````
+
+### Migrate DB and run development server
+- (myvenv)  $ cd todotoday
+- (myvenv)  $ ./manage.py migrate
+- (myvenv)  $ ./manage.py runserver
+
+### Install node dependencies
+- go to '/frontend' and install dependencies listed in package.json
+    ````
+    cd frontend
+    npm install
+    ````
+
+### Run npm server
+- in the frontend directory:
+    ````
+    npm run start
+    ````
+
+### Access the project
+- locally access the single page app at /http://localhost:8000/
+
+> If you can't access, check if there is a file named 'webpack-stats.dev.json' located at '/todotoday/' directory.
+> If not, copy the file with this name from the project's root directory to the '/todotoday/' directory.
+> Stop and restart the servers, then try again.
+
+-------------------------
+
+## Boilerplate setup
+> For detailed instructions, check [this page](http://v1k45.com/blog/modern-django-part-1-setting-up-django-and-react/). 
 
 ### Start a virtual environment (I'm using virtualenv)
 - $ python3.6 -m venv myvenv
