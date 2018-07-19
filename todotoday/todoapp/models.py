@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -36,13 +36,3 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.text
-
-    # def __init__(self, *args, **kwargs):
-    #     super(Task, self).__init__(*args, **kwargs)
-    #     self.old_is_completed = self.is_completed
-
-    # def save(self, force_insert=False, force_update=False):
-    #     if self.old_is_completed == False and self.is_completed == True:
-    #         self.completed_date = datetime.datetime.now()
-    #     super(Task, self).save(force_insert, force_update)
-    #     self.old_is_completed = self.state

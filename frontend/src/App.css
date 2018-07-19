@@ -4,7 +4,7 @@
   --todolists-container-background: rgb(255, 255, 255);
   /* rgba(248, 255, 240, 0.692);*/
   --todolists-background: rgba(255, 252, 240, 0.959);
-  --completedtasks-container-background: var(--header-background);
+  --completedtasks-container-background: var(--todolists-container-background);
 }
 
 html, body {
@@ -156,7 +156,7 @@ p.header-main-content__text {
 
 /* On mouse-over, add a deeper shadow */
 
-.card:hover, .btn-new_list:hover, .report-btn:hover {
+.card:hover, .btn-new_list:hover, .report-btn:hover, .auth-btn:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -177,9 +177,9 @@ p.header-main-content__text {
   border-radius: 100%;
   background: black;
   color: white;
-  font-size: 36px;
-  width: 5rem;
-  height: 5rem;
+  font-size: 28px;
+  width: 3.5rem;
+  height: 3.5rem;
   margin: 15px 15px 0 0;
 }
 
@@ -250,6 +250,12 @@ p.header-main-content__text {
   float: right;
 }
 
+.auth-container {
+  width: 50vw;
+  float: right;
+  margin-right: 0;
+}
+
 .auth-input {
   border: 0.5px solid var(--main-line-color);
   /* width: 15vw; */
@@ -260,11 +266,24 @@ p.header-main-content__text {
   margin-right: 5px;
 }
 
-.auth-btn {
+.auth-errors {
+  width: 40vw;
   float: right;
-  cursor: pointer;
-  width: 60px;
+  color: red;
 }
+
+.auth-btns{
+  width: 8vw;
+  margin: 5px;
+  float: right;
+}
+.auth-btn {
+  float: left;
+  cursor: pointer;
+  width: 7vw;
+  min-width: 20px;
+}
+
 
 .auth-btn.login{
   background: var(--main-line-color);
@@ -274,6 +293,14 @@ p.header-main-content__text {
 .auth-btn.register{
   background: none;
   border: 0.5px solid var(--main-line-color);;
+}
+
+.auth-logout{
+  color: var(--main-line-color);
+  cursor: pointer;
+}
+.auth-logout:hover{
+  text-decoration: underline;
 }
 
 input {

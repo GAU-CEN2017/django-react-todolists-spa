@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 /*import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { lists } from "../actions";
+import { auth } from "../actions";
 */
 
 import Login from './Login';
+
 
 class Header extends Component {
     render() {
@@ -12,8 +13,9 @@ class Header extends Component {
             < header id="top" className="header-main" >
                 <div className="header-main--inside d-flex flex-column">
                     <div className="header-main--social">
-                        {/*Sin in/ Sign up*/}
+
                         <Login />
+
                     </div>
 
 
@@ -38,5 +40,17 @@ class Header extends Component {
     }
 
 }
+
+{/* const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(auth.logout()),
+    }
+} */}
 
 export default Header;

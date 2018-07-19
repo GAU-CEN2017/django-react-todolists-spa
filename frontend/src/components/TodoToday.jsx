@@ -73,10 +73,13 @@ class TodoToday extends Component {
           </div>
         </div>
 
-        <div className="reports-container"  >
+        <hr className="header-main--lines align-self-start"/>
+
+        <div className="todolists-container"  >
+          
           <button className="report-btn" onClick={this.exportPDF}>
             {/*<i className="material-icons">file_download</i>*/}
-            <i class="fa fa-file-pdf-o" ></i>
+            <i className="fa fa-file-pdf-o" ></i>
           </button>
           <div className="completed-tasks-container d-flex flex-row" >
             <div className="card">
@@ -89,8 +92,9 @@ class TodoToday extends Component {
           </div>
 
           <div id="divToPrint" className="print-container" >
+            <h1>REPORT</h1>
             <Card text="Completed today" type="completedTasks" />
-            <Card text="Next Priorities" type="futureTasks" />
+            <Card text="Next priorities" type="futureTasks" />
           </div>
 
         </div>
